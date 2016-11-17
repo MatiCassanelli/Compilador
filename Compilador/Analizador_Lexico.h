@@ -15,8 +15,9 @@ public:
 	//Analizador_Lexico(char[100]);
 	~Analizador_Lexico();
 	bool abrir_archivo();
-	void leer_archivo();
-	char comprobar_token(char);
+	bool leer_archivo();
+	int comprobar_token(char);
 	char get_token(int);	//entero para la posicion dentro de la cadena
+	bool comprobar_cadena();
 };
 

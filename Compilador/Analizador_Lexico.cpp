@@ -40,29 +40,45 @@ char Analizador_Lexico::get_token(int pos)
 	return cadena[pos];
 }
 
-void Analizador_Lexico::leer_archivo()
+bool Analizador_Lexico::comprobar_cadena()
 {
-	int contador = 0;
-	while (!fe.eof())
+	for (int i = 0; i < cadena.size()-1; i++)
 	{
-		if (comprobar_token(fe.get()) != ' ' || comprobar_token(fe.get()) != '\n')
-		{
-			cadena.push_back(fe.get());
-			cout << "OK";
-		}
-		else
-			cerr << "Error";	//error
-		contador++;
+		if (isalpha(cadena[i]))
+			if (cadena[i + 1] != ' ')
+				return false;
 	}
-	fe.close();
+	return true;
 }
 
-char Analizador_Lexico::comprobar_token(char caracter)
+bool Analizador_Lexico::leer_archivo()
+{
+	int contador = 0;
+	char leo;
+	while (!fe.eof())
+	{
+		leo = fe.get();
+		int rta = comprobar_token(leo);
+		if (rta == 1)
+		{
+			cadena.push_back(leo);
+			//cout << "OK";
+		}
+		else
+			if (rta == 0 && leo !=-1)
+				cerr << "Error. "<<leo<<"no es un caracter valido";	//error
+		//contador++;
+	}
+	fe.close();
+	return comprobar_cadena();
+}
+
+int Analizador_Lexico::comprobar_token(char caracter)
 {
 	int i = 0;
 	caracter_leido = caracter;
-	if (caracter_leido == ' '||caracter_leido=='\n')
-		return caracter_leido;
+	if (caracter_leido=='\n')
+		return 2;
 	switch (caracter_leido)
 	{
 	case 'M':
@@ -79,13 +95,18 @@ char Analizador_Lexico::comprobar_token(char caracter)
 	case ';':
 	case '{':
 	case '}':
-	return caracter_leido;
+	case ' ':
+	return 1;
 	}
 	
 	for (char i = 'a'; i <= 'z'; i++)
 		if (i == caracter_leido)
-			return caracter_leido;
-	for (int i = 0; i < 10; i++)
+			return 1;
+	for (char i = 48; i <=57; i++)
+	{
 		if (i == caracter_leido)
-			return caracter_leido;
+			return 1;
+	}
+	return 0;
 }
+
