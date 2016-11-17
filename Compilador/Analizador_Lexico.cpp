@@ -67,7 +67,6 @@ bool Analizador_Lexico::leer_archivo()
 		else
 			if (rta == 0 && leo !=-1)
 				cerr << "Error. "<<leo<<"no es un caracter valido";	//error
-		//contador++;
 	}
 	fe.close();
 	return comprobar_cadena();
