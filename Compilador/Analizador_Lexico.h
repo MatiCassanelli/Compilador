@@ -19,5 +19,6 @@ public:
 	int comprobar_token(char);
 	char get_token(int);	//entero para la posicion dentro de la cadena
 	bool comprobar_cadena();
+	void eliminar_espacios();
 };
 

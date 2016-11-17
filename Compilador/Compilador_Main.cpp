@@ -4,18 +4,20 @@
 #include "stdafx.h"
 #include <iostream>
 #include "Analizador_Lexico.h"
+#include "Analizador_Sintactico.h"
 #include <vector>
 
 using namespace std;
 
 int main()
 {
+	Analizador_Sintactico as;
 	//char cadena[100] = { "asd.txt" };
-	Analizador_Lexico al;
-	if (al.leer_archivo())
-		cout << "Cadena bien";
-	else
-		cout << "Cadena mal";
+	//Analizador_Lexico al;
+	//if (al.leer_archivo())
+	//	cout << "Cadena bien";
+	//else
+	//	cout << "Cadena mal";
 	//ifstream archivo("asd.txt");
 	//char linea[128];
 	//int contador = 0;

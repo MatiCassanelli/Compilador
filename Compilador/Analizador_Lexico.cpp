@@ -7,7 +7,11 @@ Analizador_Lexico::Analizador_Lexico()
 	if(abrir_archivo()==false)
 		cerr << "Error al abrir el archivo" << endl;
 	else
+	{
 		leer_archivo();
+		eliminar_espacios();
+	}
+
 }
 
 //Analizador_Lexico::Analizador_Lexico(char nombre_Archivo[100])
@@ -49,6 +53,13 @@ bool Analizador_Lexico::comprobar_cadena()
 				return false;
 	}
 	return true;
+}
+
+void Analizador_Lexico::eliminar_espacios()
+{
+	for (int i = 0; i < cadena.size(); i++)
+		if (cadena[i] == ' ')
+			cadena.erase(cadena.begin() + i);
 }
 
 bool Analizador_Lexico::leer_archivo()
