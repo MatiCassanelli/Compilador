@@ -12,34 +12,11 @@ using namespace std;
 int main()
 {
 	Analizador_Sintactico as;
-	//char cadena[100] = { "asd.txt" };
 	//Analizador_Lexico al;
-	//if (al.leer_archivo())
-	//	cout << "Cadena bien";
+	//if (al.hay_error() == true)
+	//	cout << "Existe errores";
 	//else
-	//	cout << "Cadena mal";
-	//ifstream archivo("asd.txt");
-	//char linea[128];
-	//int contador = 0;
-	//vector<char> aux, aux2;
-	//if (archivo.fail())
-	//	cerr << "Error al abrir el archivo"<< endl;
-	//else
-	//	while (!archivo.eof())
-	//	{
-	//		//linea[contador]=archivo.get();
-	//		aux.push_back(archivo.get());
-	//		aux2.push_back(archivo.get());
-	//		//contador++;
-	//	}
-	////cout << linea[2] << endl;
-	//archivo.close();
-
-	//aux.shrink_to_fit();
-	//for (int i = 0; i < aux.size(); i++)
-	//{
-	//	cout << aux[i];
-	//}
+	//	cout << "No hay errores";
 	
 	system("Pause");
 	return 0;

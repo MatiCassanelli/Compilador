@@ -1,5 +1,5 @@
 M {
 R a ;
 R b ;
-z = a + b - 2 ;
-W z }
+z = a + b - 2;
+W z;}

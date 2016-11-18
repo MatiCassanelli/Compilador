@@ -4,10 +4,10 @@
 class Analizador_Sintactico
 {
 private:
-	//vector<char> alfabeto = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n' };
 	char token;
 	int c;
 	Analizador_Lexico Lexico;
+	ofstream of;
 public:
 	Analizador_Sintactico();
 	~Analizador_Sintactico();
@@ -26,5 +26,6 @@ public:
 	bool escritura();
 	bool variable();
 	bool constante();
+	void simbolos_juntos(char);
 };
 

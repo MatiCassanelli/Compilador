@@ -4,11 +4,15 @@
 
 Analizador_Lexico::Analizador_Lexico()
 {
-	if(abrir_archivo()==false)
-		cerr << "Error al abrir el archivo" << endl;
+	if (abrir_archivo() == false)
+	{
+		error = true;
+		cout << "Error al abrir el archivo" << endl;
+	}
 	else
 	{
 		leer_archivo();
+		comprobar_cadena();
 		eliminar_espacios();
 	}
 
@@ -25,15 +29,12 @@ Analizador_Lexico::Analizador_Lexico()
 
 Analizador_Lexico::~Analizador_Lexico()
 {
-	fe.close();
-	cout << "Archivo cerrado";
 }
 
 bool Analizador_Lexico::abrir_archivo()
 {
 	fe = ifstream("asd.txt");
-	if (fe.fail())
-		
+	if (fe.fail())		
 		return false;
 	else
 		return true;
@@ -41,18 +42,31 @@ bool Analizador_Lexico::abrir_archivo()
 
 char Analizador_Lexico::get_token(int pos)
 {
-	return cadena[pos];
+	if (pos > cadena.size()-1)
+		return -1;
+	else
+		return cadena[pos];
 }
 
-bool Analizador_Lexico::comprobar_cadena()
+void Analizador_Lexico::comprobar_cadena()
 {
 	for (int i = 0; i < cadena.size()-1; i++)
 	{
-		if (isalpha(cadena[i]))
-			if (cadena[i + 1] != ' ')
-				return false;
+		if (cadena[i] >= 'a' && cadena[i] <= 'z')
+			if (cadena[i + 1] >= 'a' && cadena[i + 1] <= 'z')
+			{
+				cout << cadena[i] << cadena[i + 1] << ": Nombre de variable no admitido" << endl;
+				error = true;
+				return;
+			}
+			else if (isdigit(cadena[i + 1]))
+			{
+				cout << cadena[i]<< cadena[i + 1]<<": Nombre de variable no admitido" << endl;
+				error = true;
+				return;
+			}
 	}
-	return true;
+	//error = false;
 }
 
 void Analizador_Lexico::eliminar_espacios()
@@ -62,7 +76,12 @@ void Analizador_Lexico::eliminar_espacios()
 			cadena.erase(cadena.begin() + i);
 }
 
-bool Analizador_Lexico::leer_archivo()
+bool Analizador_Lexico::hay_error()
+{
+	return error;
+}
+
+void Analizador_Lexico::leer_archivo()
 {
 	int contador = 0;
 	char leo;
@@ -73,14 +92,16 @@ bool Analizador_Lexico::leer_archivo()
 		if (rta == 1)
 		{
 			cadena.push_back(leo);
-			//cout << "OK";
 		}
 		else
-			if (rta == 0 && leo !=-1)
-				cerr << "Error. "<<leo<<"no es un caracter valido";	//error
+			if (rta == 0 && leo != -1)	//-1 es el termino de eof
+			{
+				cout << "Error. " << leo << " no es un caracter valido" << endl;
+				error = true;
+			}
 	}
 	fe.close();
-	return comprobar_cadena();
+	//return error;
 }
 
 int Analizador_Lexico::comprobar_token(char caracter)
